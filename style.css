@@ -749,17 +749,23 @@ footer a:hover { color: var(--yellow); }
    Touch targets. 44px minimum on anything tappable.
    -------------------------------------------------------------------------- */
 
-.nav-menu a,
-.mobile-menu-btn,
-.footer-links a,
-.skip-link {
-  min-height: 44px;
-  display: flex;
-  align-items: center;
+/* Touch targets apply on touch devices only. On a mouse-driven desktop,
+   forcing display on these elements overrides the layout rules that hide
+   them, and stretches footer links into tall gappy blocks. */
+@media (pointer: coarse) {
+  .nav-menu a,
+  .footer-links a,
+  .skip-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .nav-menu a { justify-content: flex-start; }
 }
 
-.nav-menu a { justify-content: flex-start; }
-.mobile-menu-btn { justify-content: center; min-width: 44px; }
+/* Sizing only. Never touches display, so the base rule that hides this
+   button on desktop still wins. */
+.mobile-menu-btn { min-width: 44px; min-height: 44px; }
 
 /* Inline links in body copy are exempt, they'd break the text flow. */
 .content a,
@@ -858,3 +864,13 @@ footer a:focus-visible {
 /* .hero-content was used in the markup but never defined. It's the text
    column of the hero grid. Sits above the confetti layer. */
 .hero-content { position: relative; z-index: 2; }
+
+
+/* --------------------------------------------------------------------------
+   Reading measure
+   .content was 62ch and .lede 46ch, while headings and grids ran the full
+   container width. The mismatch read as the text being stranded left.
+   -------------------------------------------------------------------------- */
+
+.content { max-width: 74ch; }
+.lede { max-width: 74ch; }
