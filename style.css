@@ -900,18 +900,37 @@ footer a:focus-visible {
    -------------------------------------------------------------------------- */
 
 .hero--image {
+  background-color: var(--cream);
+  position: relative;
+}
+
+/* The pattern PNG is transparent behind the shapes, so it sits on its own
+   layer over a cream field and gets dialled down with opacity. Change the
+   one number below to make it louder or quieter. At 1 it's full strength. */
+.hero--image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image: url('intersection_lockup_pink.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--pink);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Content sits above the pattern layer. */
+.hero--image .hero-inner {
+  position: relative;
+  z-index: 2;
 }
 
 /* Text never sits directly on the artwork. It gets a solid cream panel with
    the same border and shadow as every other box on the site, so contrast is
    the same 17.84:1 as the rest of the page regardless of what's behind it. */
 .hero--image .hero-panel {
-  background: var(--cream);
+  background: var(--white);
   border: var(--rule);
   box-shadow: var(--shadow-lg);
   padding: clamp(1.5rem, 4vw, 2.5rem);
@@ -959,4 +978,10 @@ footer a:focus-visible {
 @media (prefers-contrast: more) {
   /* Tints go flat white, keeping the border as the structure. */
   .hl--pink { background: var(--white); }
+}
+
+
+@media (prefers-contrast: more) {
+  /* Decorative pattern off, plain cream field. */
+  .hero--image::before { display: none; }
 }
