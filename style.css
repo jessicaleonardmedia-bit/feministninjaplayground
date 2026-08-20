@@ -1,267 +1,860 @@
-<!DOCTYPE html>
-<html lang="en-AU">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Intersection - Look Both Ways</title>
-<meta name="description" content="A panel talk show that looks at everyday issues through an unapologetically intersectional lens. Made in Melbourne for community television, streaming, and social.">
+/* ==========================================================================
+   The Intersection
+   style.css
+   Palette and type tokens up top. Everything below derives from them.
+   ========================================================================== */
 
-<meta property="og:title" content="The Intersection">
-<meta property="og:description" content="A panel talk show that looks at everyday issues through an unapologetically intersectional lens. Made in Melbourne for community television, streaming, and social.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://theintersectionshow.au/">
-<meta property="og:image" content="https://theintersectionshow.au/host_promo_intersection_2025.jpg">
+:root {
+  /* Palette */
+  --pink:   #FE05B5;
+  --yellow: #FFCA05;
+  --blue:   #1B3BFF;
+  --green:  #00E05A;
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Chivo:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+  /* Darker pink, used wherever white text sits on pink.
+     Full-strength pink with white fails contrast at 3.56:1. This is 5.91:1. */
+  --pink-dark: #BE0387;
 
-<a class="skip-link" href="#main">Skip to content</a>
+  /* 20% accent over white. Black text stays above 14:1 on all four. */
+  --tint-pink:   #FECDF0;
+  --tint-yellow: #FFF4CD;
+  --tint-blue:   #D1D7FF;
+  --tint-green:  #CCF8DE;
+  --cream:  #FDF3D2;
+  --black:  #0A0A0A;
+  --white:  #FFFFFF;
 
-<!-- ===================== Navigation ===================== -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a class="nav-brand" href="#home" data-page="home">
-      <img src="intersection_logo_temp.png" alt="" class="nav-logo">
-      <span class="brand-name">The Intersection</span>
-    </a>
-    <button class="mobile-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navMenu" aria-label="Menu">&#9776;</button>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="#home" data-page="home" aria-current="page">Home</a></li>
-      <li><a href="#about" data-page="about">About</a></li>
-      <li><a href="#contact" data-page="contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+  /* Hard shadows, no blur anywhere */
+  --shadow:    6px 6px 0 var(--black);
+  --shadow-sm: 4px 4px 0 var(--black);
+  --shadow-lg: 10px 10px 0 var(--black);
 
-<main id="main">
+  --rule: 4px solid var(--black);
 
-<!-- ===================== Home ===================== -->
-<div id="home" class="page active" tabindex="-1">
+  /* Type */
+  --display: 'Outfit', system-ui, sans-serif;
+  --body:    'Chivo', system-ui, sans-serif;
+  --mono:    'Space Mono', ui-monospace, monospace;
 
-  <section class="hero">
-    <div class="confetti" aria-hidden="true">
-      <span class="c-dot"></span>
-      <span class="c-arc"></span>
-      <span class="c-tri"></span>
-      <span class="c-sq"></span>
-      <span class="c-zig"></span>
-    </div>
-    <div class="hero-inner">
-      <div class="hero-content">
-        <h1>The Intersection</h1>
-        <p class="tagline">Look both ways</p>
-        <p class="hero-description">A panel talk show that looks at everyday issues through an unapologetically intersectional lens. Two hosts who grew up in different worlds sit down with people whose stories don't usually get on television.</p>
-        <div class="hero-cta">
-          <a class="btn" href="#about" data-page="about">About the show</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="host_promo_intersection_2025.jpg" alt="The hosts and guests of The Intersection at the studio desk.">
-      </div>
-    </div>
-  </section>
+  /* Spacing */
+  --gap:  1.5rem;
+  --pad:  clamp(1.25rem, 4vw, 3rem);
+  --max:  1180px;
+}
 
-</div>
+/* --------------------------------------------------------------------------
+   Reset and base
+   -------------------------------------------------------------------------- */
 
-<!-- ===================== About ===================== -->
-<div id="about" class="page" tabindex="-1">
-  <div class="container content-page">
-    <span class="eyebrow">About</span>
-    <h1>About the show</h1>
-    <div class="content">
-      <p class="lede">A panel talk show that looks at everyday issues through an unapologetically intersectional lens. Two hosts who grew up in different worlds sit down with people whose stories don't usually get on television, and pull complicated subjects apart with humour rather than jargon. Jess and Shaz have very different backgrounds and upbringings, and a strong friendship built on deep conversations about big ideas.</p>
-      <p>The pilot is a periods episode where the two hosts, a hijabi journalist and a bogan weirdo, a trans non-binary health promotion officer and a culturally aware period educator all talk about their own periods on free-to-air television. Community television is the only place that conversation can happen, which is brilliant, and why we made the show.</p>
-      <p>The Intersection is made by three women in Melbourne. It goes out on community television in Melbourne, Geelong and Adelaide, on streaming, and on social, which gets its own content.</p>
+*, *::before, *::after { box-sizing: border-box; }
 
-      <h2>Vision</h2>
-      <p>A kind and tolerant society that shares compassion with people from all walks of life.</p>
+* { margin: 0; padding: 0; }
 
-      <h2>Mission</h2>
-      <p>To create community television that reaches the hearts and minds of everyday people, breaks down ignorance, and fosters everyday kindness.</p>
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
-      <h2>Values</h2>
-      <ul class="values-list">
-        <li><strong>Kindness</strong> At the heart of everything we do.</li>
-        <li><strong>Respect</strong> We value the experiences of all people.</li>
-        <li><strong>Inclusivity</strong> We make space for those often left out.</li>
-        <li><strong>Intersectional feminism</strong> We uplift people in an inclusive way.</li>
-        <li><strong>Authenticity</strong> We stay true to ourselves, our values and beliefs.</li>
-        <li><strong>Gentle curiosity</strong> Openness and a desire to understand.</li>
-        <li><strong>Optimism</strong> Believing in the possibility of a better, fairer future.</li>
-        <li><strong>Bravery</strong> Willing to challenge norms and speak truth with care.</li>
-        <li><strong>Unashamed</strong> Proud of who we are and the stories we share.</li>
-      </ul>
+body {
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--black);
+  background: var(--cream);
+  overflow-x: hidden;
+}
 
-      <h2>Who makes it</h2>
-    </div>
+img { max-width: 100%; height: auto; display: block; }
 
-    <div class="team-grid">
-      <article class="card"><div class="card-body"><h3>Shazma Gaffoor</h3><p>Shaz is a producer and host of The Intersection, and a journalist covering health policy, cultural identity and social justice. She has produced vox pops for The Project, worked in sports broadcasting at the Australian Open, written health research features for La Trobe University, and writes regularly for Al Wasat Magazine.</p><p><a href="/shazma-gaffoor">Shazma's portfolio</a></p></div></article>
-      <article class="card"><div class="card-body"><h3>Jessica Leonard</h3><p>Jess is a producer and host of The Intersection, and a bogan weirdo with a background in health promotion communications. She teaches media, volunteers as a breastfeeding counsellor, and turns up for a lot of community arts.</p></div></article>
-      <article class="card"><div class="card-body"><h3>Sarah Lewis</h3><p>PLACEHOLDER, SARAH TO SUPPLY. Starting point: producer and director of The Intersection, supporting community television productions at Channel 31 since 2013.</p></div></article>
-    </div>
-    <div class="content">
-      <h2>Supported by</h2>
-      <ul class="supporters">
-        <li>Channel 31</li>
-        <li>Bent TV</li>
-        <li>Media Mentors Australia</li>
-        <li>Media Diversity Australia</li>
-        <li>Making The Call</li>
-        <li>Women's Health In the North</li>
-      </ul>
-    </div>
-  </div>
-</div>
+a { color: var(--black); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { color: var(--pink); }
 
-<!-- ===================== Contact ===================== -->
-<div id="contact" class="page" tabindex="-1">
-  <div class="container content-page">
-    <span class="eyebrow">Contact</span>
-    <h1>Get in touch</h1>
-    <p class="form-note">Guest suggestions, story ideas, crewing, or anything else. You can also email us at <a href="mailto:the.intersection.show.australia@gmail.com">the.intersection.show.australia@gmail.com</a>.</p>
+:focus-visible {
+  outline: 4px solid var(--blue);
+  outline-offset: 3px;
+}
 
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form" id="contactForm">
-      <input type="hidden" name="form-name" value="contact">
-      <p hidden>
-        <label>Leave this blank <input name="bot-field"></label>
-      </p>
+.container {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
 
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" autocomplete="name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" autocomplete="email" required>
-      </div>
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5"></textarea>
-      </div>
-      <button type="submit" class="submit-btn" id="submitBtn">Send message</button>
-    </form>
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--yellow);
+  color: var(--black);
+  border: var(--rule);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--mono);
+  font-weight: 700;
+  z-index: 999;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
 
-    <div class="form-status" id="formStatus" role="status" tabindex="-1" hidden>
-      <h3>Message sent</h3>
-      <p>Thanks. We'll get back to you.</p>
-    </div>
-  </div>
-</div>
+/* --------------------------------------------------------------------------
+   Type scale
+   -------------------------------------------------------------------------- */
 
-</main>
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
 
-<!-- ===================== Footer ===================== -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h3>The Intersection</h3>
-        <p>A panel talk show that looks at everyday issues through an unapologetically intersectional lens. Made by three Melbourne women, for community television, streaming, and social.</p>
-      </div>
-      <div>
-        <h3>Pages</h3>
-        <ul class="footer-links">
-          <li><a href="#home" data-page="home">Home</a></li>
-          <li><a href="#about" data-page="about">About</a></li>
-          <li><a href="#contact" data-page="contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Elsewhere</h3>
-        <ul class="footer-links">
-          <li><a href="mailto:the.intersection.show.australia@gmail.com">the.intersection.show.australia@gmail.com</a></li>
-          <li>PLACEHOLDER, social links once handles are confirmed</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>Made in Naarm / Melbourne on the lands of the Wurundjeri Woi-wurrung people.</p>
-      <p class="footer-tagline">Look both ways</p>
-    </div>
-  </div>
-</footer>
+h1 { font-size: clamp(1.9rem, 5.4vw, 3.6rem); line-height: 1.05; }
+h2 { font-size: clamp(1.4rem, 3.6vw, 2.3rem); line-height: 1.08; }
+h3 { font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.15; }
 
-<script>
-(function () {
-  var pages = document.querySelectorAll('.page');
-  var navLinks = document.querySelectorAll('.nav-menu a');
-  var menu = document.getElementById('navMenu');
-  var menuBtn = document.getElementById('menuBtn');
+p + p { margin-top: 1rem; }
 
-  function showPage(id) {
-    var target = document.getElementById(id);
-    if (!target) return;
+.eyebrow {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: inline-block;
+  border: 3px solid var(--black);
+  background: var(--white);
+  padding: 0.35rem 0.7rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+}
 
-    pages.forEach(function (p) { p.classList.remove('active'); });
-    target.classList.add('active');
+.lede {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  line-height: 1.5;
+  max-width: 46ch;
+}
 
-    navLinks.forEach(function (a) {
-      if (a.getAttribute('data-page') === id) { a.setAttribute('aria-current', 'page'); }
-      else { a.removeAttribute('aria-current'); }
-    });
+/* --------------------------------------------------------------------------
+   Zebra crossing divider. The signature element.
+   "Look both ways" as a structural device rather than a line of copy.
+   -------------------------------------------------------------------------- */
 
-    menu.classList.remove('active');
-    menuBtn.setAttribute('aria-expanded', 'false');
+.crossing {
+  height: 46px;
+  border-top: var(--rule);
+  border-bottom: var(--rule);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--black) 0 34px,
+    transparent 34px 68px
+  );
+  background-color: var(--cream);
+}
 
-    window.scrollTo(0, 0);
-    target.focus();
+.crossing--tight { height: 28px; }
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--cream);
+  border-bottom: var(--rule);
+}
+
+.nav-container {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 0.9rem var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.nav-logo { height: 40px; width: auto; }
+
+.brand-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.01em;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.nav-menu a {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border: 3px solid transparent;
+}
+
+.nav-menu a:hover {
+  border-color: var(--black);
+  background: var(--yellow);
+  color: var(--black);
+}
+
+.nav-menu a[aria-current="page"] {
+  border-color: var(--black);
+  background: var(--pink-dark);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-menu-btn {
+  display: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  background: var(--yellow);
+  border: 3px solid var(--black);
+  box-shadow: var(--shadow-sm);
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  font-family: var(--body);
+}
+.mobile-menu-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--black); }
+
+/* --------------------------------------------------------------------------
+   Page switching
+   -------------------------------------------------------------------------- */
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+
+.hero {
+  border-bottom: var(--rule);
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 7vw, 5rem) var(--pad);
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 { margin-bottom: 0.5rem; }
+
+.hero .tagline {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  background: var(--black);
+  color: var(--yellow);
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-description { max-width: 40ch; font-size: 1.15rem; }
+
+.hero-image {
+  border: var(--rule);
+  box-shadow: var(--shadow-lg);
+  background: var(--white);
+}
+
+.hero-cta {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Memphis confetti, decorative only */
+.confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.confetti span { position: absolute; display: block; }
+.c-dot   { width: 18px; height: 18px; border-radius: 50%; background: var(--blue); }
+.c-tri   { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 26px solid var(--green); }
+.c-sq    { width: 22px; height: 22px; background: var(--yellow); transform: rotate(18deg); }
+.c-arc   { width: 46px; height: 23px; border-radius: 46px 46px 0 0; background: var(--pink); }
+.c-zig   { width: 40px; height: 12px; background:
+             repeating-linear-gradient(135deg, var(--pink) 0 6px, transparent 6px 12px); }
+
+.confetti span:nth-child(1) { top: 8%;  left: 4%; }
+.confetti span:nth-child(2) { top: 20%; right: 6%; }
+.confetti span:nth-child(3) { bottom: 14%; left: 8%; }
+.confetti span:nth-child(4) { bottom: 26%; right: 3%; }
+.confetti span:nth-child(5) { top: 52%; left: 46%; }
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.4rem;
+  min-height: 44px;
+  border: 3px solid var(--black);
+  background: var(--pink-dark);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow); color: var(--white); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--black); }
+
+.btn--yellow { background: var(--yellow); color: var(--black); }
+.btn--yellow:hover { color: var(--black); }
+.btn--blue { background: var(--blue); color: var(--white); }
+.btn--white { background: var(--white); color: var(--black); }
+.btn--white:hover { color: var(--black); }
+
+/* --------------------------------------------------------------------------
+   Sections
+   -------------------------------------------------------------------------- */
+
+.section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.section--pink   { background: var(--pink); color: var(--white); }
+.section--blue   { background: var(--blue); color: var(--white); }
+.section--yellow { background: var(--yellow); }
+.section--green  { background: var(--green); }
+.section--white  { background: var(--white); }
+
+.section--pink .eyebrow,
+.section--blue .eyebrow { background: var(--white); color: var(--black); }
+
+.section--pink a:hover,
+.section--blue a:hover { color: var(--yellow); }
+
+.section-title { margin-bottom: 1.5rem; }
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Cards
+   -------------------------------------------------------------------------- */
+
+.card {
+  background: var(--white);
+  border: var(--rule);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.card:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-lg); }
+
+.card-body { padding: 1.25rem 1.4rem 1.5rem; }
+.card-body h3 { margin-bottom: 0.5rem; }
+.card-body p { font-size: 0.98rem; }
+
+/* --------------------------------------------------------------------------
+   Featured video
+   -------------------------------------------------------------------------- */
+
+.featured-video {
+  border: var(--rule);
+  box-shadow: var(--shadow-lg);
+  background: var(--black);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-video iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.video-placeholder {
+  color: var(--cream);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+.video-placeholder .tip { font-size: 0.72rem; opacity: 0.7; margin-top: 0.6rem; }
+
+.video-description {
+  margin-top: 1.25rem;
+  max-width: 60ch;
+}
+
+/* --------------------------------------------------------------------------
+   Episode grid
+   -------------------------------------------------------------------------- */
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--gap);
+}
+
+.video-thumbnail {
+  aspect-ratio: 16 / 9;
+  background: var(--black);
+  color: var(--cream);
+  border-bottom: var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.video-info { padding: 1.25rem 1.4rem 1.5rem; }
+.video-info h3 { margin-bottom: 0.4rem; }
+.video-info p { font-size: 0.95rem; }
+
+.episode-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: inline-block;
+  border-bottom: 3px solid var(--pink);
+  padding-bottom: 2px;
+}
+
+.watch-btn {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 3px solid var(--black);
+}
+.watch-btn:hover { border-color: var(--pink); }
+
+/* --------------------------------------------------------------------------
+   Social strip
+   -------------------------------------------------------------------------- */
+
+.social-scroll {
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+}
+.social-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  background: var(--white);
+  border: var(--rule);
+  box-shadow: var(--shadow-sm);
+}
+.social-placeholder {
+  aspect-ratio: 1;
+  background: var(--cream);
+  border-bottom: var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-align: center;
+  padding: 1rem;
+}
+.social-card p { padding: 0.9rem 1rem; font-size: 0.92rem; }
+
+/* --------------------------------------------------------------------------
+   Content pages
+   -------------------------------------------------------------------------- */
+
+.content-page { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.content-page h1 { margin-bottom: 1.5rem; }
+
+.content { max-width: 62ch; }
+.content h2 { margin-top: 2.5rem; margin-bottom: 0.75rem; }
+.content p { margin-bottom: 1rem; }
+
+.values-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+.values-list li {
+  background: var(--tint-pink);
+  border: 3px solid var(--black);
+  box-shadow: var(--shadow-sm);
+  padding: 0.9rem 1rem;
+}
+.values-list strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--gap);
+  margin-top: 1.5rem;
+}
+
+.info-box {
+  background: var(--yellow);
+  border: var(--rule);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.info-box h2 { margin-top: 0; }
+
+.supporters {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.supporters li {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  border: 3px solid var(--black);
+  background: var(--white);
+  padding: 0.45rem 0.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+
+.contact-form { max-width: 560px; }
+
+.form-group { margin-bottom: 1.25rem; }
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 3px solid var(--black);
+  background: var(--white);
+  font-size: 1rem;
+  font-family: var(--body);
+  color: var(--black);
+}
+
+input:focus, textarea:focus {
+  outline: 4px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.form-note {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  max-width: 46ch;
+}
+
+.submit-btn {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.95rem 1.6rem;
+  min-height: 44px;
+  border: 3px solid var(--black);
+  background: var(--pink-dark);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.submit-btn:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow); }
+.submit-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--black); }
+.submit-btn:disabled { background: #9A9A9A; cursor: not-allowed; transform: none; box-shadow: var(--shadow-sm); }
+
+.form-status {
+  margin-top: 1.5rem;
+  background: var(--yellow);
+  border: var(--rule);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+.form-status[hidden] { display: none; }
+.form-status h3 { margin-bottom: 0.4rem; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+footer {
+  background: var(--black);
+  color: var(--cream);
+  padding-block: clamp(2rem, 5vw, 3rem);
+}
+footer a { color: var(--cream); }
+footer a:hover { color: var(--yellow); }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--gap);
+  margin-bottom: 2rem;
+}
+
+.footer-grid h3 {
+  font-size: 0.85rem;
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 0.7rem;
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+
+.footer-bottom {
+  border-top: 3px solid var(--cream);
+  padding-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.footer-tagline {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-image { order: -1; }
+
+  .mobile-menu-btn { display: block; }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--cream);
+    border-bottom: var(--rule);
+    padding: 0.5rem var(--pad) 1rem;
+  }
+  .nav-menu.active { display: flex; }
+  .nav-menu a { padding: 0.75rem 0.5rem; border-width: 3px; }
+
+  .navbar { position: relative; }
+}
+
+@media (max-width: 480px) {
+  .crossing { height: 32px; background-image: repeating-linear-gradient(90deg, var(--black) 0 22px, transparent 22px 44px); }
+  .confetti { display: none; }
+  :root { --shadow: 5px 5px 0 var(--black); --shadow-lg: 7px 7px 0 var(--black); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .navbar, .confetti, footer { display: none; }
+  .page { display: block !important; }
+}
+
+
+/* ==========================================================================
+   Additions
+   Tinted values, touch targets, small-screen fixes, contrast and focus.
+   ========================================================================== */
+
+/* Values cycle through the four accent tints. Nine values, four colours. */
+.values-list li:nth-child(4n+1) { background: var(--tint-pink); }
+.values-list li:nth-child(4n+2) { background: var(--tint-yellow); }
+.values-list li:nth-child(4n+3) { background: var(--tint-blue); }
+.values-list li:nth-child(4n+4) { background: var(--tint-green); }
+
+/* --------------------------------------------------------------------------
+   Touch targets. 44px minimum on anything tappable.
+   -------------------------------------------------------------------------- */
+
+.nav-menu a,
+.mobile-menu-btn,
+.footer-links a,
+.skip-link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu a { justify-content: flex-start; }
+.mobile-menu-btn { justify-content: center; min-width: 44px; }
+
+/* Inline links in body copy are exempt, they'd break the text flow. */
+.content a,
+.card-body a,
+.lede a,
+.form-note a {
+  min-height: 0;
+  display: inline;
+}
+
+input, textarea, .submit-btn { min-height: 44px; }
+
+/* --------------------------------------------------------------------------
+   Focus. Visible on everything, and never clipped by a parent.
+   -------------------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 4px solid var(--blue);
+  outline-offset: 3px;
+  position: relative;
+  z-index: 5;
+}
+
+/* On blue backgrounds the blue outline disappears. Switch to yellow. */
+.section--blue a:focus-visible,
+.section--blue button:focus-visible,
+footer a:focus-visible {
+  outline-color: var(--yellow);
+}
+
+/* --------------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  /* Single column for every grid. Two-up cards get cramped below this. */
+  .values-list,
+  .team-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
 
-  document.querySelectorAll('[data-page]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      var id = link.getAttribute('data-page');
-      history.pushState(null, '', '#' + id);
-      showPage(id);
-    });
-  });
+  /* Long words in headings, "Intersectional feminism" being the worst,
+     shouldn't overflow the box. */
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
 
-  menuBtn.addEventListener('click', function () {
-    var open = menu.classList.toggle('active');
-    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+  /* Hard shadows eat horizontal space on narrow screens. */
+  :root {
+    --shadow:    4px 4px 0 var(--black);
+    --shadow-lg: 6px 6px 0 var(--black);
+  }
 
-  window.addEventListener('popstate', function () {
-    showPage((location.hash || '#home').slice(1));
-  });
+  /* Buttons go full width so they're easy to hit. */
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { justify-content: center; text-align: center; }
+  .submit-btn { width: 100%; }
 
-  if (location.hash) { showPage(location.hash.slice(1)); }
+  /* Supporter pills wrap rather than squeeze. */
+  .supporters li { font-size: 0.72rem; }
+}
 
-  // Contact form
-  var form = document.getElementById('contactForm');
-  var status = document.getElementById('formStatus');
-  var submitBtn = document.getElementById('submitBtn');
+@media (max-width: 380px) {
+  /* Smallest phones. Ease the padding so content isn't a narrow column. */
+  :root { --pad: 1rem; }
+}
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending';
+/* --------------------------------------------------------------------------
+   User preferences
+   -------------------------------------------------------------------------- */
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
-    }).then(function (res) {
-      if (!res.ok) throw new Error('failed');
-      form.hidden = true;
-      status.hidden = false;
-      status.focus();
-    }).catch(function () {
-      status.hidden = false;
-      status.querySelector('h3').textContent = 'That did not send';
-      status.querySelector('p').textContent = 'Try again, or email us directly.';
-      status.focus();
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send message';
-    });
-  });
-})();
-</script>
+@media (prefers-contrast: more) {
+  /* Drop the tints, go back to white, keep the structure. */
+  .values-list li { background: var(--white); }
+  :root { --rule: 4px solid #000; }
+  a { text-decoration-thickness: 3px; }
+}
 
-</body>
-</html>
+@media (prefers-reduced-motion: reduce) {
+  /* The existing rule covers scroll behaviour. This covers the hover lifts. */
+  .card, .card:hover,
+  .btn, .btn:hover, .btn:active,
+  .submit-btn, .submit-btn:hover, .submit-btn:active,
+  .mobile-menu-btn:active {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* .hero-content was used in the markup but never defined. It's the text
+   column of the hero grid. Sits above the confetti layer. */
+.hero-content { position: relative; z-index: 2; }
