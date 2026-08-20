@@ -936,16 +936,17 @@ footer a:focus-visible {
   padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-/* The studio photo competes with the artwork. Hidden on this variant,
-   which also gives the panel room to breathe. */
-.hero--image .hero-image { display: none; }
-.hero--image .hero-inner { grid-template-columns: minmax(0, 640px); }
+/* Studio photo stays. With the pattern dialled back to 28% it no longer
+   competes, so the hero keeps its two-column layout: panel left, photo right. */
+.hero--image .hero-image {
+  position: relative;
+  z-index: 2;
+}
 
 @media (max-width: 640px) {
   /* Portrait phones crop a centred background badly. Anchor to the top
      so the lockup stays in frame. */
-  .hero--image { background-position: top center; }
-  .hero--image .hero-inner { grid-template-columns: 1fr; }
+  .hero--image::before { background-position: top center; }
 }
 
 /* --------------------------------------------------------------------------
