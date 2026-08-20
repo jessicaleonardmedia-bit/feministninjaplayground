@@ -15,6 +15,9 @@
      Full-strength pink with white fails contrast at 3.56:1. This is 5.91:1. */
   --pink-dark: #BE0387;
 
+  /* 10% pink over white. Flat field for the hero. Black text 16.4:1. */
+  --pink-pale: #FEE6F8;
+
   /* 20% accent over white. Black text stays above 14:1 on all four. */
   --tint-pink:   #FECDF0;
   --tint-yellow: #FFF4CD;
@@ -896,39 +899,26 @@ footer a:focus-visible {
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Hero with the pink lockup as a full-bleed background
+   Hero on a flat pale pink field
    -------------------------------------------------------------------------- */
 
 .hero--image {
-  background-color: var(--cream);
+  background-color: var(--pink-pale);
   position: relative;
 }
 
-/* The pattern PNG is transparent behind the shapes, so it sits on its own
-   layer over a cream field and gets dialled down with opacity. Change the
-   one number below to make it louder or quieter. At 1 it's full strength. */
-.hero--image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('intersection_lockup_pink.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.28;
-  pointer-events: none;
-  z-index: 0;
-}
+/* Flat pale pink field, no pattern. The pattern layer fought the photo and
+   the panel for attention. To bring it back, restore a .hero--image::before
+   with the background image and a low opacity. */
 
-/* Content sits above the pattern layer. */
+/* Content sits above the field. */
 .hero--image .hero-inner {
   position: relative;
   z-index: 2;
 }
 
-/* Text never sits directly on the artwork. It gets a solid cream panel with
-   the same border and shadow as every other box on the site, so contrast is
-   the same 17.84:1 as the rest of the page regardless of what's behind it. */
+/* Hero text panel. White against the pale pink field, with the same border
+   and shadow as every other box on the site. Black on white is 19.8:1. */
 .hero--image .hero-panel {
   background: var(--white);
   border: var(--rule);
@@ -936,17 +926,10 @@ footer a:focus-visible {
   padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-/* Studio photo stays. With the pattern dialled back to 28% it no longer
-   competes, so the hero keeps its two-column layout: panel left, photo right. */
+/* Studio photo. Two-column hero on desktop: panel left, photo right. */
 .hero--image .hero-image {
   position: relative;
   z-index: 2;
-}
-
-@media (max-width: 640px) {
-  /* Portrait phones crop a centred background badly. Anchor to the top
-     so the lockup stays in frame. */
-  .hero--image::before { background-position: top center; }
 }
 
 /* --------------------------------------------------------------------------
@@ -979,10 +962,4 @@ footer a:focus-visible {
 @media (prefers-contrast: more) {
   /* Tints go flat white, keeping the border as the structure. */
   .hl--pink { background: var(--white); }
-}
-
-
-@media (prefers-contrast: more) {
-  /* Decorative pattern off, plain cream field. */
-  .hero--image::before { display: none; }
 }
