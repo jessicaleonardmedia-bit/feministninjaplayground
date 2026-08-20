@@ -963,3 +963,48 @@ footer a:focus-visible {
   /* Tints go flat white, keeping the border as the structure. */
   .hl--pink { background: var(--white); }
 }
+
+
+
+/* --------------------------------------------------------------------------
+   Footer social grid
+   Four platforms as a 2x2 block of bordered chips. Replaces the stacked
+   link list and the email address, which the contact form now covers.
+   -------------------------------------------------------------------------- */
+
+.social-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  max-width: 320px;
+}
+
+.social-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.5rem 0.4rem;
+  border: 3px solid var(--cream);
+  color: var(--cream);
+  transition: background 0.12s, color 0.12s;
+}
+
+.social-grid a:hover,
+.social-grid a:focus-visible {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-grid a { transition: none; }
+}
