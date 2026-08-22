@@ -949,10 +949,12 @@ footer a:focus-visible {
   background: var(--yellow);
 }
 
-.hl--yellow { background: var(--yellow); color: var(--black); }
-.hl--pink   { background: var(--tint-pink); color: var(--black); }
-.hl--green  { background: var(--green); color: var(--black); }
-.hl--blue   { background: var(--blue); color: var(--white); }
+/* One treatment, not four. Mixing full-strength blue and green with a pink
+   pastel read as three unrelated decisions rather than a system. */
+.hl--yellow,
+.hl--pink,
+.hl--green,
+.hl--blue { background: var(--yellow); color: var(--black); }
 
 /* Highlighted headings need breathing room, since the block sits tight
    against the line above. */
@@ -1068,4 +1070,80 @@ footer a:focus-visible {
 .person-link:hover .person-more,
 .person-link:focus-visible .person-more {
   background: var(--yellow);
+}
+
+
+/* --------------------------------------------------------------------------
+   Vision, mission, values
+   Three vertical panels inside one container. Tints only, no full-strength
+   fills, so the three read as one set.
+   -------------------------------------------------------------------------- */
+
+.vmv {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  border: var(--rule);
+  box-shadow: var(--shadow);
+  background: var(--white);
+  padding: 1rem;
+  margin: 2.5rem 0;
+}
+
+@media (min-width: 860px) {
+  /* Values carries nine items against one sentence each for the other two,
+     so it takes the wider column. */
+  .vmv { grid-template-columns: 1fr 1fr 1.4fr; }
+}
+
+.vmv-panel {
+  border: 3px solid var(--black);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.vmv-panel h2 {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.vmv-panel p { margin: 0; }
+
+.vmv-panel--pink   { background: var(--tint-pink); }
+.vmv-panel--blue   { background: var(--tint-blue); }
+.vmv-panel--yellow { background: var(--tint-yellow); }
+
+/* Inside a tinted panel the values are plain rows with a rule between them,
+   not boxes. Boxes inside a box inside a box was too much. */
+.vmv .values-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vmv .values-list li {
+  background: none;
+  border: 0;
+  border-top: 2px solid var(--black);
+  box-shadow: none;
+  padding: 0.55rem 0;
+  font-size: 0.92rem;
+}
+
+.vmv .values-list li:first-child { border-top: 0; padding-top: 0; }
+
+.vmv .values-list strong {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+@media (prefers-contrast: more) {
+  .vmv-panel--pink,
+  .vmv-panel--blue,
+  .vmv-panel--yellow { background: var(--white); }
 }
