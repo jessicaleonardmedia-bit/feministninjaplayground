@@ -1090,10 +1090,11 @@ footer a:focus-visible {
   margin: 2.5rem 0;
 }
 
-@media (min-width: 860px) {
-  /* Values carries nine items against one sentence each for the other two,
-     so it takes the wider column. */
-  .vmv { grid-template-columns: 1fr 1fr 1.4fr; }
+@media (min-width: 700px) {
+  /* Vision and mission share the top row. Values spans the full width
+     underneath, which suits nine items far better than a narrow column. */
+  .vmv { grid-template-columns: 1fr 1fr; }
+  .vmv-panel--yellow { grid-column: 1 / -1; }
 }
 
 .vmv-panel {
@@ -1115,13 +1116,23 @@ footer a:focus-visible {
 .vmv-panel--blue   { background: var(--tint-blue); }
 .vmv-panel--yellow { background: var(--tint-yellow); }
 
-/* Inside a tinted panel the values are plain rows with a rule between them,
-   not boxes. Boxes inside a box inside a box was too much. */
+/* Values run across the full-width panel in columns. Plain rows with a rule
+   above each, not boxes, since boxes inside a box inside a box was too much. */
 .vmv .values-list {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+@media (min-width: 560px) {
+  .vmv .values-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .vmv .values-list { grid-template-columns: repeat(3, 1fr); }
 }
 
 .vmv .values-list li {
@@ -1132,8 +1143,6 @@ footer a:focus-visible {
   padding: 0.55rem 0;
   font-size: 0.92rem;
 }
-
-.vmv .values-list li:first-child { border-top: 0; padding-top: 0; }
 
 .vmv .values-list strong {
   display: block;
