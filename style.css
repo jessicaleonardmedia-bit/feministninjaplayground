@@ -1008,3 +1008,64 @@ footer a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .social-grid a { transition: none; }
 }
+
+/* --------------------------------------------------------------------------
+   Team cards
+   Name, then a portrait headshot below it. All three cards keep the same
+   proportions whether or not there's a photo, so the set reads as
+   deliberate rather than as one card missing something.
+   -------------------------------------------------------------------------- */
+
+.card--person {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card--person h3 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.card--person img,
+.person-noimage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--black);
+}
+
+/* The third card has no photo yet. A flat tint block holds the same space,
+   so the row stays even. Swapping in an <img> later needs no other change. */
+.person-noimage {
+  background: var(--tint-blue);
+}
+
+/* One card links out to a personal portfolio page. The whole card is the
+   target, so the link wraps the contents rather than sitting inside them. */
+.person-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.person-more {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.person-link:hover .person-more,
+.person-link:focus-visible .person-more {
+  background: var(--yellow);
+}
